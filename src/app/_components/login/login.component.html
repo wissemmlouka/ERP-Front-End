@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login</title>
+</head>
+<body>
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<div class="login100-form-title" style="background-image: url(../assets/images/erp.webp);">
+					<span class="login100-form-title-1">
+						Sign In
+					</span>
+				</div>
+                <div *ngIf="authError" style="max-width: 80%; text-align: center;padding: 5px;margin-top: 30px;" class="alert alert-danger align-items-center mx-auto">
+					<i class="bi-exclamation-octagon-fill"></i>
+					<strong class="mx-2">Error!</strong>{{authError}}
+					<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+				</div>
+				<form (ngSubmit)="login()"  class="login100-form" [formGroup]="loginForm">
+					<div [ngClass]="(loginForm.get('email')!.invalid ||invalidEmail)
+                     &&(loginForm.controls['email'].dirty || loginForm.controls['email'].touched)?
+                     'wrap-input101 m-b-26':'wrap-input100 m-b-26'">
+						<span class="label-input100">Username</span>
+						<input (input)="invalidEmail?invalidEmail=false:null" formControlName="email" class="input100" type="text" name="username" placeholder="Enter username">
+                      
+                    </div>
+                    <div style="margin-top: -15px;" class="invalid" *ngIf="(loginForm.get('email')!.invalid||invalidEmail)
+                    &&(loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+                        <p *ngIf="loginForm.controls['email'].hasError('required')">Username is required!</p>
+                        <p *ngIf="loginForm.controls['email'].hasError('email')||invalidEmail">Invalid username!</p>
+                      </div>
+					<div [ngClass]="(loginForm.get('password')!.invalid||invalidPass) &&(loginForm.controls['password'].dirty || loginForm.controls['password'].touched)?'wrap-input101 m-b-26':'wrap-input100 m-b-26'">
+						<span class="label-input100">Password</span>
+						<input (input)="invalidPass?invalidPass=false:null" formControlName="password" class="input100" type="password" name="pass" placeholder="Enter password">
+                    
+                    </div>
+                    <div style="margin-top: -15px;"  class="invalid" *ngIf="(loginForm.get('password')!.invalid||invalidPass)
+                    &&(loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                        <p *ngIf="loginForm.controls['password'].hasError('required')">Password is required!</p>
+                        <p *ngIf="loginForm.controls['password'].hasError('minlength')">Password is short!</p>
+						<p *ngIf="invalidPass&& !(loginForm.controls['password'].hasError('required')||loginForm.controls['password'].hasError('minlength'))">Invalid password!</p>
+
+                      </div>
+					<div class="flex-sb-m w-full p-b-30">
+						<div >
+							
+						</div>
+
+						<div>
+							<!-- Button trigger modal -->
+							<span  data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+								Forgot Password?
+						   </span>
+  
+			
+						</div>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							<div *ngIf="isLoad" class="spinner-border spinner-border-sm" role="status">
+
+							</div>
+                            <div *ngIf="!isLoad">Login</div>
+						</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false">
+	<div class="modal-dialog modal-dialog-centered">
+	  <div class="modal-content">
+		<div class="modal-header">
+		  <h5 class="modal-title" id="staticBackdropLabel">Reset password</h5>
+		  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+		</div>
+		<div class="modal-body">
+			<form (ngSubmit)="reset()"  class="form" [formGroup]="resetForm">
+				<div >
+				   <span class="">Username</span>
+				   <input
+				   [ngClass]="(resetForm.get('email')!.invalid ||invalidEmail)
+				&&(resetForm.controls['email'].dirty || resetForm.controls['email'].touched)?
+				'is-invalid form-control':'form-control'"
+				     (input)="invalidEmail?invalidEmail=false:null" formControlName="email" type="text" name="username" placeholder="Enter username">
+					 <div  class="invalid-feedback" *ngIf="(resetForm.get('email')!.invalid||invalidEmail)
+					 &&(resetForm.controls['email'].dirty || resetForm.controls['email'].touched)">
+						 <p *ngIf="resetForm.controls['email'].hasError('required')">Username is required!</p>
+						 <p *ngIf="resetForm.controls['email'].hasError('email')||invalidEmail">Invalid username!</p>
+					   </div>	
+			   </div>
+			
+                  
+             </form>
+		</div>
+		<div class="modal-footer">
+		  <button type="button" value="Close" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+		  <input type="submit" value="Send" class="btn btn-primary">
+		</div>
+	  </div>
+	</div>
+  </div>
+			
+
+</body>
+</html>

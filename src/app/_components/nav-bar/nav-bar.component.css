@@ -1,0 +1,19 @@
+.user-avatar {
+
+    width: 36px;
+    height: 36px;
+    background-color: #e47311;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    border-radius: 50%;
+  }
+
+  .collapse {
+    display: flex;
+    justify-content: space-between; /* Distributes content at both ends */
+    align-items: center; /* Aligns vertically */
+    padding: 10px 20px; /* Example padding */
+  }
